@@ -1,0 +1,11 @@
+<h2>OTP Verification</h2>
+
+<%= form_with(url: verify_otp_path, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :otp, "Enter the OTP sent to your email" %>
+    <%= f.text_field :otp, autofocus: true %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Verify OTP" %>
+  </div>
+<% end %>
