@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
 
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', omniauth_callbacks: 'users/omniauth_callbacks' }
+
   devise_scope :user do
     get 'otp_verification', to: 'users/sessions#otp_verification', as: :otp_verification
     post 'verify_otp', to: 'users/sessions#verify_otp', as: :verify_otp
