@@ -10,6 +10,11 @@ class EmployeesController < ApplicationController
     @employee = User.new
   end
 
+  def show
+    @user = current_user
+    @tasks = current_user.tasks
+  end
+
   def create
     @employee = User.new(employee_params)
     @employee.role = 'employee'

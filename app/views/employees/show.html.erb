@@ -1,21 +1,40 @@
-<h1>Employee Details</h1>
+<h1><%= @user.name %>'s Profile</h1>
+<p>Email: <%= @user.email %></p>
+<p>Department: <%= @user.department %></p>
+<p>Onboarding Status: <%= @user.onboarding_status %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @employee.name %>
-</p>
-<p>
-  <strong>Email:</strong>
-  <%= @employee.email %>
-</p>
-<p>
-  <strong>Department:</strong>
-  <%= @employee.department %>
-</p>
-<p>
-  <strong>Onboarding Status:</strong>
-  <%= @employee.onboarding_status %>
-</p>
+<h2>Your Tasks</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Due Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.status %></td>
+        <td><%= task.due_date %></td>
+        <td>
+          <% if task.status == 'pending' %>
+            <%= link_to 'Mark as Completed', mark_completed_user_task_path(@user, task), method: :post %>
+            <%= form_with url: upload_document_user_task_path(@user, task), local: true, method: :post do |f| %>
+              <%= f.file_field :document, class: "form-control" %>
+              <%= f.submit 'Upload Document', class: "btn btn-primary" %>
+            <% end %>
+          <% else %>
+            <p>Document uploaded</p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+<%= link_to 'Back to Home', root_path %>

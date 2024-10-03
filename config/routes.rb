@@ -13,5 +13,13 @@ Rails.application.routes.draw do
   end
 
   resources :tasks
-  post 'tasks/:id/mark_completed', to: 'tasks#mark_completed', as: :mark_completed_task
+
+  resources :users do
+    resources :tasks do
+      member do
+        get :mark_completed
+        post :upload_document
+      end
+    end
+  end
 end

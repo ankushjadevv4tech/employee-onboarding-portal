@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_user, only: [:index, :new, :create, :edit, :update, :destroy]
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_user, only: %i[index new create edit update destroy mark_completed upload_document]
+  before_action :set_task, only: %i[edit update destroy mark_completed upload_document]
 
   def index
     @completed_tasks = Task.where(status: 'completed')
@@ -31,15 +31,14 @@ class TasksController < ApplicationController
     end
   end
 
-  def destroy
-    @task.destroy
-    redirect_to tasks_path, notice: 'Task deleted successfully.'
+  def mark_completed
+    @task.update(status: 'completed')
+    redirect_to user_tasks_path(@user), notice: 'Task marked as completed.'
   end
 
-  def mark_completed
-    @task = Task.find(params[:id])
-    @task.update(status: 'completed')
-    redirect_to tasks_path, notice: 'Task marked as completed.'
+  def upload_document
+    @task.update(document: params[:document])
+    redirect_to employee_path(current_user), notice: 'Document uploaded successfully.'
   end
 
   private
