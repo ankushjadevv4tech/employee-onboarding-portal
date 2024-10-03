@@ -1,6 +1,6 @@
 # app/controllers/users/registrations_controller.rb
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_permitted_parameters, only: [:create, :update]
 
   def create
     build_resource(sign_up_params)
@@ -25,7 +25,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     SecureRandom.hex(4).to_s
   end
 
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :role, :department])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :role, :department])
   end
 end
