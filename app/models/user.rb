@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  has_many :tasks, foreign_key: :assigned_to_id, dependent: :destroy
+
   enum role: { employee: 0, hr: 1 }
 
   devise :database_authenticatable, :registerable,

@@ -1,0 +1,46 @@
+<%= form_with model: @task, local: true do |form| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :due_date, class: "form-label" %>
+    <%= form.date_select :due_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, options_for_select([['Pending', 'pending'], ['Completed', 'completed']], @task.status), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :assigned_to_id, "Assign to", class: "form-label" %>
+    <%= form.collection_select :assigned_to_id, User.where(role: 'employee'), :id, :name, { prompt: "Select an Employee" }, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :document %>
+    <%= form.file_field :document, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

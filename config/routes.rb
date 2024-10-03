@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     get 'otp_verification', to: 'users/sessions#otp_verification', as: :otp_verification
     post 'verify_otp', to: 'users/sessions#verify_otp', as: :verify_otp
   end
+
+  resources :tasks
+  post 'tasks/:id/mark_completed', to: 'tasks#mark_completed', as: :mark_completed_task
 end

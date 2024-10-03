@@ -4,6 +4,7 @@
 
 <% if user_signed_in? && current_user.hr? %>
   <%= link_to "Manage Employees", employees_path, class: "btn btn-primary" %>
+  <%= link_to 'Task Tracker', tasks_path, class: 'btn btn-primary' %>
 <% end %>
 
 <% if user_signed_in? %>
