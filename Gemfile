@@ -33,7 +33,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem 'cancancan', '~> 3.0'
-
+gem 'mailcatcher'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
