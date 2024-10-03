@@ -1,10 +1,14 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  enum role: { employee: 0, hr: 1 }
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable
 
+  validates :onboarding_status, inclusion: { in: %w[not_started in_progress completed] }, allow_nil: true
+       
   def self.from_omniauth(auth)
     user = User.find_or_initialize_by(email: auth.info.email)
 

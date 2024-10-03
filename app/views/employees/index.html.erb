@@ -1,0 +1,29 @@
+<h1>Employees</h1>
+
+<%= link_to 'Add New Employee', new_employee_path %>
+<%= link_to 'Back to Home', root_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Onboarding Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <td><%= employee.name %></td>
+        <td><%= employee.email %></td>
+        <td><%= employee.department %></td>
+        <td><%= employee.onboarding_status %></td>
+        <td>
+          <%= link_to 'Edit', edit_employee_path(employee) %> |
+          <%= link_to 'Delete', employee_path(employee), data: { "turbo-method": :delete } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

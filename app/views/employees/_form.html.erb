@@ -1,0 +1,36 @@
+<%= form_with model: @employee, local: true, url: @employee.new_record? ? employees_path : employee_path(@employee) do |form| %>
+  <% if @employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <ul>
+        <% @employee.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :department, class: "form-label" %>
+    <%= form.text_field :department, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :onboarding_status, class: "form-label" %>
+    <%= form.select :onboarding_status, options_for_select([['Not Started', 'not_started'], ['In Progress', 'in_progress'], ['Completed', 'completed']], @employee.onboarding_status), {}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
