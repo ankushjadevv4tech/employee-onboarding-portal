@@ -20,8 +20,7 @@
         <td><%= task.description %></td>
         <td><%= task.due_date %></td>
         <td>
-          <%= link_to 'Edit', edit_task_path(task) %> |
-          <%= link_to 'Mark as Completed', mark_completed_task_path(task), method: :post %>
+          <%= link_to 'Edit', edit_task_path(task) %>
         </td>
       </tr>
     <% end %>
