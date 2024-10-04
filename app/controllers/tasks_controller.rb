@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_user, only: %i[index new create edit update destroy mark_completed upload_document]
   before_action :set_task, only: %i[edit update destroy mark_completed upload_document]
+  load_and_authorize_resource
 
   def index
     @completed_tasks = Task.where(status: 'completed')
@@ -17,7 +18,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: 'Task created successfully.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +28,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notice: 'Task updated successfully.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
