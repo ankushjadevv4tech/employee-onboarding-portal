@@ -1,6 +1,6 @@
 <%= form_with model: @task, local: true do |form| %>
   <% if @task.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="border p-4 rounded text-red-600 border-red-600">
       <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
       <ul>
         <% @task.errors.full_messages.each do |message| %>
@@ -10,39 +10,39 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.label :title, class: "form-label" %>
-    <%= form.text_field :title, class: "form-control" %>
+  <div class="form-group my-2">
+    <%= form.label :title, class: "form-label block font-bold" %>
+    <%= form.text_field :title, class: "form-control w-full rounded mt-1 shadow" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :description, class: "form-label" %>
-    <%= form.text_area :description, class: "form-control" %>
+  <div class="form-group my-4">
+    <%= form.label :description, class: "form-label block font-bold" %>
+    <%= form.text_area :description, class: "form-control w-full rounded mt-1 shadow" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :due_date, class: "form-label" %>
-    <%= form.date_select :due_date, class: "form-control" %>
+  <div class="form-group my-4">
+    <%= form.label :due_date, class: "form-label block font-bold" %>
+    <%= form.date_select :due_date, class: "form-control w-full rounded mt-1 shadow" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :status, class: "form-label" %>
-    <%= form.select :status, options_for_select([['Pending', 'pending'], ['Completed', 'completed']], @task.status), {}, class: "form-control" %>
+  <div class="form-group my-4">
+    <%= form.label :status, class: "form-label block font-bold" %>
+    <%= form.select :status, options_for_select([['Pending', 'pending'], ['Completed', 'completed']], @task.status), {}, class: "form-control w-full rounded mt-1 shadow" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :assigned_to_id, "Assign to", class: "form-label" %>
-    <%= form.collection_select :assigned_to_id, User.where(role: 'employee'), :id, :name, { prompt: "Select an Employee" }, class: "form-control" %>
+  <div class="form-group my-4">
+    <%= form.label :assigned_to_id, "Assign to", class: "form-label block font-bold" %>
+    <%= form.collection_select :assigned_to_id, User.where(role: 'employee'), :id, :name, { prompt: "Select an Employee" }, class: "form-control w-full rounded mt-1 shadow" %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :document %>
-    <%= form.file_field :document, class: "form-control" %>
+  <div class="form-group my-4">
+    <%= form.label :document, class: "form-label block font-bold" %>
+    <%= form.file_field :document, class: "form-control w-full rounded mt-1 border-gray-500 border p-2"%>
   </div>
 
-  <div class="form-group">
-    <%= form.submit class: "btn btn-primary" %>
+  <div class="form-group my-10">
+    <%= form.submit class: "btn btn-primary bg-cyan-600 py-2 text-white w-full rounded font-bold" %>
   </div>
 <% end %>
 
-<%= link_to 'Back', tasks_path, class: 'btn btn-primary' %>
+<%= link_to 'Back', tasks_path, class: '"btn btn-primary bg-black py-2 px-5 text-white w-full rounded font-bold"' %>

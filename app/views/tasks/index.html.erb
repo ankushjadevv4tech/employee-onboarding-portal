@@ -1,68 +1,84 @@
-<h1>Task Tracker</h1>
+<div class="container mx-auto px-2">
+  <div class="flex justify-between my-10 flex-wrap">
+    <h1 class="text-4xl font-bold">Task Tracker</h1>
+    <div class="mt-3 sm:mt-0">
+      <button class="bg-cyan-600 rounded mr-2 text-white font-bold">
+        <%= link_to 'Add New Task', new_task_path, class:'px-3 py-2 inline-block' %>
+      </button>
+      <button class="bg-cyan-600 rounded ml-2 text-white font-bold">
+        <%= link_to 'Back to Home', root_path, class:'px-3 py-2 inline-block' %>
+      </button>
+    </div>
+  </div>
+  
 
-<%= link_to 'Add New Task', new_task_path, class: 'btn btn-primary' %>
-<%= link_to 'Back to Home', root_path %>
+  <h2 class="text-2xl font-bold">Pending Tasks</h2>
+  <div class="overflow-x-auto w-screen sm:w-full">
+      <table class="table-auto w-full my-3">
+        <thead>
+          <tr>
+            <th class="bg-black p-3 text-white text-start rounded-tl-lg">Title</th>
+            <th class="bg-black p-3 text-white text-start">Description</th>
+            <th class="bg-black p-3 text-white text-start">Due Date</th>
+            <th class="bg-black p-3 text-white text-start rounded-tr-lg">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="border rounded-br-lg rounded-bl-lg">
+          <% @pending_tasks.each do |task| %>
+            <tr class="border-b-2">
+              <td class="p-3 text-black text-start"><%= task.title %></td>
+              <td class="p-3 text-black text-start"><%= task.description %></td>
+              <td class="p-3 text-black text-start"><%= task.due_date %></td>
+              <td class="p-3 text-black text-start">
+                <button class="bg-cyan-600 rounded mr-1 mt-1 text-white">
+                  <%= link_to 'Edit', edit_task_path(task), class:'px-3 py-2 inline-block' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-<h2>Pending Tasks</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Due Date</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @pending_tasks.each do |task| %>
+  <h2 class="text-2xl font-bold mt-10">Completed Tasks</h2>
+  <div class="overflow-x-auto w-screen sm:w-full">
+      <table class="table-auto w-full my-3">
+    <thead>
       <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
-        <td><%= task.due_date %></td>
-        <td>
-          <%= link_to 'Edit', edit_task_path(task) %>
-        </td>
+        <th class="bg-black p-3 text-white text-start rounded-tl-lg">Title</th>
+        <th class="bg-black p-3 text-white text-start">Description</th>
+        <th class="bg-black p-3 text-white text-start rounded-tr-lg">Due Date</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="border rounded-br-lg rounded-bl-lg">
+      <% @completed_tasks.each do |task| %>
+        <tr class="border-b-2">
+          <td class="p-3 text-black text-start"><%= task.title %></td>
+          <td class="p-3 text-black text-start"><%= task.description %></td>
+          <td class="p-3 text-black text-start"><%= task.due_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<h2>Completed Tasks</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Due Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @completed_tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
-        <td><%= task.due_date %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h2>Upcoming Tasks</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Due Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @upcoming_tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
-        <td><%= task.due_date %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h2 class="text-2xl font-bold mt-10">Upcoming Tasks</h2>
+  <div class="overflow-x-auto w-screen sm:w-full">
+      <table class="table-auto w-full my-3">
+        <thead>
+          <tr>
+            <th class="bg-black p-3 text-white text-start rounded-tl-lg">Title</th>
+            <th class="bg-black p-3 text-white text-start">Description</th>
+            <th class="bg-black p-3 text-white text-start rounded-tr-lg">Due Date</th>
+          </tr>
+        </thead>
+        <tbody class="border rounded-br-lg rounded-bl-lg">
+          <% @upcoming_tasks.each do |task| %>
+            <tr class="border-b-2">
+              <td class="p-3 text-black text-start"><%= task.title %></td>
+              <td class="p-3 text-black text-start"><%= task.description %></td>
+              <td class="p-3 text-black text-start"><%= task.due_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table> 
+  </div>
+</div>

@@ -1,29 +1,44 @@
-<h1>Employees</h1>
-
-<%= link_to 'Add New Employee', new_employee_path %>
-<%= link_to 'Back to Home', root_path %>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Department</th>
-      <th>Onboarding Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @employees.each do |employee| %>
-      <tr>
-        <td><%= employee.name %></td>
-        <td><%= employee.email %></td>
-        <td><%= employee.department %></td>
-        <td><%= employee.onboarding_status %></td>
-        <td>
-          <%= link_to 'Edit', edit_employee_path(employee) %> |
-          <%= link_to 'Delete', employee_path(employee), data: { "turbo-method": :delete } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container mx-auto px-2">
+  <div class="flex justify-between my-10 flex-wrap">
+    <h1 class="text-4xl font-bold">Employees</h1>
+    <div class="mt-3 sm:mt-0">
+      <button class="bg-cyan-600 rounded mr-2 text-white font-bold">
+        <%= link_to 'Add New Employee', new_employee_path, class:'px-3 py-2 inline-block' %>
+      </button>
+      <button class="bg-cyan-600 rounded ml-2 text-white font-bold">
+        <%= link_to 'Back to Home', root_path, class:'px-3 py-2 inline-block' %>
+      </button>
+    </div>
+  </div>
+  <div class="overflow-x-auto w-screen sm:w-full">
+    <table class="table-auto w-full my-3">
+      <thead>
+        <tr>
+          <th class="bg-black p-3 text-white text-start rounded-tl-lg">Name</th>
+          <th class="bg-black p-3 text-white text-start">Email</th>
+          <th class="bg-black p-3 text-white text-start">Department</th>
+          <th class="bg-black p-3 text-white text-start">Onboarding Status</th>
+          <th class="bg-black p-3 text-white text-start rounded-tr-lg">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="border rounded-br-lg rounded-bl-lg">
+        <% @employees.each do |employee| %>
+          <tr class="border-b-2">
+            <td class="p-3 text-black text-start"><%= employee.name %></td>
+            <td class="p-3 text-black text-start"><%= employee.email %></td>
+            <td class="p-3 text-black text-start"><%= employee.department %></td>
+            <td class="p-3 text-black text-start"><%= employee.onboarding_status %></td>
+            <td class="p-3 text-black text-start flex">
+              <button class="bg-cyan-600 rounded mr-1 mt-1 text-white">
+                <%= link_to 'Edit', edit_employee_path(employee), class: 'px-3 py-2 inline-block' %>
+              </button>
+              <button class="bg-cyan-600 rounded ml-1 mt-1 text-white">
+                <%= link_to 'Delete', employee_path(employee), class: 'px-3 py-2 inline-block', data: { "turbo-method": :delete } %>
+              </button>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

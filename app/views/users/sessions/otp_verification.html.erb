@@ -1,11 +1,13 @@
-<h2>OTP Verification</h2>
+<div class="border rounded-lg my-10 shadow p-10 w-11/12 sm:w-5/12 mx-auto block">
+  <h2 class="font-bold text-2xl text-center mb-8">OTP Verification</h2>
 
-<%= form_with(url: verify_otp_path, local: true) do |f| %>
-  <div class="field">
-    <%= f.label :otp, "Enter the OTP sent to your email" %>
-    <%= f.text_field :otp, autofocus: true %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Verify OTP" %>
-  </div>
-<% end %>
+  <%= form_with(url: verify_otp_path, local: true) do |f| %>
+    <div class="field form-group my-2">
+      <%= f.label :otp, "Enter the OTP sent to your email", class: "form-label block font-bold" %>
+      <%= f.text_field :otp, autofocus: true, class: "form-control w-full rounded mt-1 border-gray-500 border p-2" %>
+    </div>
+    <div class="actions form-group my-10">
+      <%= f.submit "Verify OTP", class: "btn btn-primary bg-cyan-600 py-2 text-white w-full rounded font-bold" %>
+    </div>
+  <% end %>
+</div>
