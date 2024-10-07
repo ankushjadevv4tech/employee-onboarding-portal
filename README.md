@@ -58,12 +58,18 @@ To enable Google OAuth login, you need to create a Google API project and get OA
 Update devise.rb file with the Google OAuth credentials:
   config.omniauth :google_oauth2, <client_id>, <client_secret>
 
-5. Start MailCatcher:
+5. Precompile assets
+
+rails assets:precompile
+
+6. Start MailCatcher:
+
 mailcatcher
 
 Visit http://127.0.0.1:1080 to view the intercepted emails.
 
-6. Start the Rails Server
+7. Start the Rails Server
+
 rails server
 
 Visit the application at http://localhost:3000.
