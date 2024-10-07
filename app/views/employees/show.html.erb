@@ -1,16 +1,16 @@
 <div class="container mx-auto px-2">
   <div class="flex justify-between mt-10 flex-wrap mb-4">
-    <h1 class="text-4xl font-bold"><%= @user.name %>'s Profile</h1>
+    <h1 class="text-4xl font-bold"><%= current_user.name %>'s Profile</h1>
   </div>
   <div class="flex w-full flex-wrap mb-5">
     <div class="w-full sm:w-4/12 border p-2">
-      <p><span class="font-bold">Email:</span> <%= @user.email %></p>
+      <p><span class="font-bold">Email:</span> <%= current_user.email %></p>
     </div>
     <div class="w-full sm:w-4/12 border p-2">
-      <p><span class="font-bold">Department:</span> <%= @user.department %></p>
+      <p><span class="font-bold">Department:</span> <%= current_user.department %></p>
     </div>
     <div class="w-full sm:w-4/12 border p-2">
-      <p><span class="font-bold">Onboarding Status:</span> <%= @user.onboarding_status %></p>
+      <p><span class="font-bold">Onboarding Status:</span> <%= current_user.onboarding_status %></p>
     </div>
   </div>
 
@@ -36,9 +36,9 @@
               <td class="p-3 text-black text-start flex">
                 <% if task.status == 'pending' %>
                   <button class="bg-cyan-600 rounded mr-1 mt-1 text-white">
-                    <%= link_to 'Mark as Completed', mark_completed_user_task_path(@user, task), class: 'px-3 py-2 inline-block', method: :post %>
+                    <%= link_to 'Mark as Completed', mark_completed_user_task_path(current_user, task), class: 'px-3 py-2 inline-block', method: :post %>
                   </button>
-                  <%= form_with url: upload_document_user_task_path(@user, task), local: true, method: :post do |f| %>
+                  <%= form_with url: upload_document_user_task_path(current_user, task), local: true, method: :post do |f| %>
                     <%= f.file_field :document, class: "form-control rounded mt-1 border-gray-500 border p-2" %>
                     <%= f.submit 'Upload Document', class: "btn btn-primary bg-cyan-600 py-2 text-white px-3 rounded font-bold" %>
                   <% end %>

@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
-  before_action :set_user, only: %i[index new create edit update destroy mark_completed upload_document]
-  before_action :set_task, only: %i[edit update destroy mark_completed upload_document]
   load_and_authorize_resource
 
+  before_action :set_task, except: %i[index new create]
+
   def index
-    @completed_tasks = Task.where(status: 'completed')
-    @pending_tasks = Task.where(status: 'pending')
-    @upcoming_tasks = Task.where('due_date > ?', Date.today)
+    @completed_tasks = Task.completed
+    @pending_tasks = Task.pending
+    @upcoming_tasks = Task.upcoming
   end
 
   def new
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
   def mark_completed
     @task.update(status: 'completed')
-    redirect_to user_tasks_path(@user), notice: 'Task marked as completed.'
+    redirect_to employee_path(current_user), notice: 'Task marked as completed.'
   end
 
   def upload_document
@@ -43,10 +43,6 @@ class TasksController < ApplicationController
   end
 
   private
-
-  def set_user
-    @user = User.find(params[:user_id]) if params[:user_id]
-  end
 
   def set_task
     @task = Task.find(params[:id])

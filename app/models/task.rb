@@ -4,4 +4,8 @@ class Task < ApplicationRecord
 
   validates :title, presence: true
   validates :status, inclusion: { in: %w[completed pending upcoming] }
+
+  scope :completed, -> { where(status: 'completed') }
+  scope :pending, -> { where(status: 'pending') }
+  scope :upcoming, -> { where('due_date > ?', Date.today) }
 end

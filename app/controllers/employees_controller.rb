@@ -1,9 +1,10 @@
 class EmployeesController < ApplicationController
-  before_action :authenticate_user!
   load_and_authorize_resource class: 'User'
+  before_action :authenticate_user!
+  before_action :set_user, except: [:index, :show, :new, :create]
 
   def index
-    @employees = User.where(role: 'employee')
+    @employees = User.employees
   end
 
   def new
@@ -11,14 +12,11 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @user = current_user
     @tasks = current_user.tasks
   end
 
   def create
     @employee = User.new(employee_params)
-    @employee.role = 'employee'
-    @employee.password = Devise.friendly_token[0, 20]
 
     if @employee.save
       redirect_to employees_path, notice: 'Employee created successfully.'
@@ -27,12 +25,9 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def edit
-    @employee = User.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @employee = User.find(params[:id])
     if @employee.update(employee_params)
       redirect_to employees_path, notice: 'Employee updated successfully.'
     else
@@ -41,12 +36,15 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee = User.find(params[:id])
     @employee.destroy
     redirect_to employees_path, notice: 'Employee deleted successfully.'
   end
 
   private
+
+  def set_user
+    @employee = User.find(params[:id])
+  end
 
   def employee_params
     params.require(:user).permit(:name, :email, :department, :onboarding_status)
