@@ -68,6 +68,7 @@
             <th class="bg-black p-3 text-white text-start rounded-tl-lg">Title</th>
             <th class="bg-black p-3 text-white text-start">Description</th>
             <th class="bg-black p-3 text-white text-start rounded-tr-lg">Due Date</th>
+            <th class="bg-black p-3 text-white text-start rounded-tr-lg">Actions</th>
           </tr>
         </thead>
         <tbody class="border rounded-br-lg rounded-bl-lg">
@@ -76,6 +77,10 @@
               <td class="p-3 text-black text-start"><%= task.title %></td>
               <td class="p-3 text-black text-start"><%= task.description %></td>
               <td class="p-3 text-black text-start"><%= task.due_date %></td>
+              <td class="p-3 text-black text-start">
+                <button class="bg-cyan-600 rounded mr-1 mt-1 text-white">
+                  <%= link_to 'Edit', edit_task_path(task), class:'px-3 py-2 inline-block' %>
+              </td>
             </tr>
           <% end %>
         </tbody>
