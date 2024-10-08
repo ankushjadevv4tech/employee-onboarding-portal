@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to otp_verification_path
     else
       clean_up_passwords(resource)
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

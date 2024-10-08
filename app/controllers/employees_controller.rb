@@ -19,7 +19,8 @@ class EmployeesController < ApplicationController
     @employee = User.new(employee_params)
 
     if @employee.save
-      redirect_to employees_path, notice: 'Employee created successfully.'
+      redirect_to employees_path, notice: 'Employee created successfully. Default password is `password`,
+      employee need to update this later'
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +30,8 @@ class EmployeesController < ApplicationController
 
   def update
     if @employee.update(employee_params)
-      redirect_to employees_path, notice: 'Employee updated successfully.'
+      redirect_to employees_path, notice: 'Employee updated successfully. Default password is `password`,
+      employee need to update this later'
     else
       render :edit, status: :unprocessable_entity
     end

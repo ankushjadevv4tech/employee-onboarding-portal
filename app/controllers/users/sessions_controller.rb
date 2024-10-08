@@ -13,7 +13,7 @@ class Users::SessionsController < Devise::SessionsController
         redirect_to otp_verification_path
       else
         flash.now[:alert] = "Unable to generate OTP. Please try again."
-        render :new
+        render :new, status: :unprocessable_entity
       end
     else
       super
@@ -33,7 +33,7 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to root_path, notice: 'Successfully logged in!'
     else
       flash.now[:alert] = "Invalid OTP or OTP expired."
-      render :otp_verification
+      render :otp_verification, status: :unprocessable_entity
     end
   end
 end

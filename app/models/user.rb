@@ -23,7 +23,7 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
     elsif user.new_record? || user.provider_changed? || user.uid_changed?
-      user.password = Devise.friendly_token[0, 20]
+      user.password = 'password' # Set a default password if not provided
     end
 
     user.save!
@@ -37,6 +37,6 @@ class User < ApplicationRecord
   end
 
   def set_default_password
-    self.password ||= Devise.friendly_token[0, 20]  # Set a default password if not provided
+    self.password ||= 'password' # Set a default password if not provided
   end
 end
