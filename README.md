@@ -71,3 +71,10 @@ Ensure you have the following installed on your system:
 ### 7. Start the Rails Server
     rails server
   Visit the application at http://localhost:3000.
+
+### Note:
+    Default password for employees created by HR is 'password'
+    User created through google auth have default password 'password'
+    default role for a user created by google auth is employee,
+    password and role can be later updated by the user
+    
