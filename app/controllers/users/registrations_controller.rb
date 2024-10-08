@@ -5,6 +5,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
 
+    # Check if a user with the same email already exists
+    if User.exists?(email: resource.email)
+      resource.save
+      render :new, status: :unprocessable_entity
+      return
+    end
+  
     otp_code = generate_otp
     resource.update(otp_secret: otp_code, otp_sent_at: Time.current)
 

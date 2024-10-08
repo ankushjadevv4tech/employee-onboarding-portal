@@ -30,10 +30,10 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-    if user.hr?
+    if user&.hr?
       can :manage, User # HR can manage all users
       can :manage, Task # HR can manage tasks
-    elsif user.employee?
+    elsif user&.employee?
       can :manage, User, id: user.id # Employees can read their own profile
       can :manage, Task, assigned_to_id: user.id # Employees can manage their own tasks
     end
