@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     otp_code = generate_otp
     resource.update(otp_secret: otp_code, otp_sent_at: Time.current)
 
-    if resource.save(validate: false)
+    if resource.save
       UserMailer.send_otp(resource.email, otp_code).deliver_now
 
       session[:otp_user_id] = resource.id
